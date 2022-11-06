@@ -92,7 +92,7 @@ header {
 }
 
 .nav__links li {
-  padding: 0px 20px;
+  padding: 0px 15px;
 }
 
 .nav__links li a {
@@ -105,7 +105,9 @@ header {
 
 .cta1212 {
   padding: 9px 17px;
-  background-color: rgba(0, 136, 169, 1);
+  background-color: rgb(0, 0, 0);
+  color: white;
+  font-weight: 600;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -181,7 +183,7 @@ z-index:20;
   }
 }
 
-@media only screen and (max-width: 840px) {
+@media only screen and (max-width: 1080px) {
   .nav__links,
   .cta1212 {
     display: none;
@@ -220,27 +222,27 @@ z-index:20;
 
     
 <div id="wrapper1212">
-    <header>
-        <a style="text-align: center; margin: 0;" class="logo1212" href="index.html"><p style="color:rgb(0, 211, 53)" >Custom<span style="color:rgb(0, 0, 0)">Wall</span><span style="color:red">Printing</span></p></a>
-        <nav>
-            <ul style="text-align: center; margin: 0;" class="nav__links">
-                <li><a  href="Gallery.html">Gallery</a></li>
-                <li><a  href="Imagine.html">Imagine</a></li>
-                <li style="font-size:1.09rem; font-weight: 500;">503-828-5038</li>
-            </ul>
-        </nav>
-        <a class="cta1212" href="contact.html">Contact</a>
-        <p class="menu cta1212">Menu</p>
-    </header>
-    <div class="overlay1212">
-        <a style="cursor:pointer; padding: 0" class="close">&times;</a>
-        <div class="overlay1212__content">
-          <a style="padding-bottom:0;" href="Gallery.html">Gallery</a>
-          <a style="cursor:pointer; padding: 0" href="Imagine.html">Imagine</a>
-          <a style="cursor:pointer; padding: 0; color:#003d18;" href="contact.html">Contact</a>
-          <li style="font-size:1.5rem; font-weight: 550; list-style: none;color:#000000;">503-828-5038</li>
-        </div>
+  <header style="position:fixed; top:0; width:100%; z-index: 10; ">
+    <a style="text-align: center; margin: 0;" class="logo1212" href="index.html"><p style="color:rgb(0, 211, 53)" >Custom<span style="color:rgb(0, 0, 0)">Wall</span><span style="color:red">Printing</span></p></a>
+    <nav>
+        <ul style="text-align: center; margin: 0; font-size: 1.3rem;" class="nav__links">
+            <li><a  href="Gallery.html">Gallery</a></li>
+            <li><a  href="Imagine.html">Imagine</a></li>
+            <li style=" font-weight: 500; margin-right:9rem; text-align: center;">503-828-5038</li>
+        </ul>
+    </nav>
+    <a class="cta1212" href="contact.html">Contact</a>
+    <p class="menu cta1212">Menu</p>
+</header>
+<div class="overlay1212">
+    <a style="cursor:pointer; padding: 0" class="close">&times;</a>
+    <div class="overlay1212__content">
+      <a style="padding-bottom:0;" href="Gallery.html">Gallery</a>
+      <a style="cursor:pointer; padding: 0" href="Imagine.html">Imagine</a>
+      <a style="cursor:pointer; padding: 0; color:#003d18;" href="contact.html">Contact</a>
+      <li style="font-size:1.5rem; font-weight: 550; list-style: none;color:#000000;">503-828-5038</li>
     </div>
+</div>
 
     <!--this ones script is herererererere-->
     <script type="text/javascript" >
@@ -265,8 +267,8 @@ menuClose.addEventListener("click", () => {
 
 </div>
 
-<div class="mod_article block" id="article-970">
-    <div class="ce_text _container block" style=" --margin-top: -30px;">
+<div class="mod_article block" id="article-970" >
+    <div class="ce_text _container block" >
     <div class="text">
     <h1 style="text-align: center; font-size:3rem">Contact Us</h1>
     <h2 style="text-align: center;"><span style="color: #808080; font-size:1.5rem">If you have any questions, we look forward to hearing from you</span></h2>
