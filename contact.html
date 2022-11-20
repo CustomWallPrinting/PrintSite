@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #ffffff;">
+<html lang="en" style="background-color: #f2f2f2;">
 
 <head>
 <meta charset="utf-8">
@@ -47,172 +47,173 @@
 
     
 
-  @media screen and (max-width: 1023px) {
-    video.myVideoBox {
-      display: none;
-    }
-  }
-  
-  
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 7%;
-    background-color: #ffffff;
-  }
-  
-  .logo1212 {
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    font-size:1.8rem;
-    font-family: monospace;
-    font-weight: 550;
-  }
-  
-  .nav__links a,
-  .cta1212,
-  .overlay1212__content a {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  .nav__links {
-    list-style: none;
-    display: flex;
-  }
-  
-  .nav__links li {
-    padding: 0px 15px;
-  }
-  
-  .nav__links li a {
-    transition: color 0.3s ease 0s;
-  }
-  
-  .nav__links li a:hover {
-    color: #0088a9;
-  }
-  
-  .cta1212 {
-    padding: 9px 17px;
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-weight: 600;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s;
-  }
-  
-  .cta1212:hover {
-    background-color: rgba(0, 136, 169, 0.8);
-  }
-  
-  /* Mobile Nav */
-  
-  .menu {
+@media screen and (max-width: 1023px) {
+  video.myVideoBox {
     display: none;
   }
-  
-  .overlay1212 {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background-color: #f5f6ff;
-    overflow-x: hidden;
-    transition: width 0.5s ease 0s;
-    z-index: 20;
-  }
-  
-  .overlay1212--active {
-    width: 100%;
-  }
-  
-  .overlay1212__content {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  color:#ffffff;
-  z-index:20;
-  }
-  
-  
-  
+}
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 7%;
+  background-color: #ffffff;
+}
+
+.logo1212 {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-size:1.8rem;
+  font-family: monospace;
+  font-weight: 550;
+}
+
+.nav__links a,
+.cta1212,
+.overlay1212__content a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+}
+
+.nav__links li {
+  padding: 0px 15px;
+}
+
+.nav__links li a {
+  transition: color 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+  color: #0088a9;
+}
+
+.cta1212 {
+  padding: 9px 17px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease 0s;
+}
+
+.cta1212:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+/* Mobile Nav */
+
+.menu {
+  display: none;
+}
+
+.overlay1212 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: #f5f6ff;
+  overflow-x: hidden;
+  transition: width 0.5s ease 0s;
+  z-index: 20;
+}
+
+.overlay1212--active {
+  width: 100%;
+}
+
+.overlay1212__content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+color:#ffffff;
+z-index:20;
+}
+
+
+
+.overlay1212 a {
+  padding: 15px;
+  font-size: 36px;
+  display: block;
+  transition: color 0.3s ease 0s;
+}
+
+.overlay1212 a:hover,
+.overlay1212 a:focus {
+  color: #0088a9;
+}
+.overlay1212 .close {
+  position: absolute;
+  top: 40px;
+  right: 45px;
+  font-size: 60px;
+  color: #000000;
+}
+
+@media screen and (max-height: 450px) {
   .overlay1212 a {
-    padding: 15px;
-    font-size: 36px;
-    display: block;
-    transition: color 0.3s ease 0s;
-  }
-  
-  .overlay1212 a:hover,
-  .overlay1212 a:focus {
-    color: #0088a9;
+    font-size: 20px;
   }
   .overlay1212 .close {
-    position: absolute;
-    top: 40px;
-    right: 45px;
-    font-size: 60px;
-    color: #000000;
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
   }
-  
-  @media screen and (max-height: 450px) {
-    .overlay1212 a {
-      font-size: 20px;
-    }
-    .overlay1212 .close {
-      font-size: 40px;
-      top: 15px;
-      right: 35px;
-    }
+}
+
+@media only screen and (max-width: 1080px) {
+  .nav__links,
+  .cta1212 {
+    display: none;
   }
-  
-  @media only screen and (max-width: 1080px) {
-    .nav__links,
-    .cta1212 {
-      display: none;
-    }
-    .menu {
-      display: initial;
-    }
+  .menu {
+    display: initial;
   }
-  
-  
-  @media screen and (max-width: 450px) {
-      .logo1212 {
-        font-size: 1.3rem;
-      }
-    
+}
+
+
+@media screen and (max-width: 450px) {
+    .logo1212 {
+      font-size: 1.3rem;
     }
   
-  
-    @media screen and (max-width: 360px) {
-      .logo1212 {
-        font-size: 1rem;
-      }
-    
+  }
+
+
+  @media screen and (max-width: 360px) {
+    .logo1212 {
+      font-size: 1rem;
     }
   
-  
-  
-  
-  </style>
+  }
+
+
+
+
+
+</style>
 
 
 
@@ -222,7 +223,7 @@
 
     
 <div id="wrapper1212">
-  <header style="position:fixed; top:0; width:100%; z-index: 10;">
+  <header style="position:fixed; top:0; width:100%; z-index: 10; ">
     <a style="text-align: center; margin: 0;" class="logo1212" href="index.html"><p style="color:rgb(0, 211, 53)" >Custom<span style="color:rgb(0, 0, 0)">Wall</span><span style="color:red">Printing</span></p></a>
     <nav>
         <ul style="text-align: center; margin: 0; font-size: 1.3rem;" class="nav__links">
@@ -262,56 +263,20 @@ menuClose.addEventListener("click", () => {
     </script>
 
 
-
-
-
-
-
-
-
-<div style="margin-top:83.83px; background: #fbfbfb;" class="mod_article block" id="" >
-  <div class="ce_text _container block"  >
-  <div class="text" >
-  <h1 style="text-align: center; font-size:3rem">Imagine this on your wall</h1>
-
-
-</div>
-  </div>
-  </div>
-
-<div style="display:flex; justify-content:center; ">
-
-<video type="video/mp4" muted autoplay controls style="width:80%;" src="tiger vid.mp4"></video>
-
-
-
+<div class="porsche-box" style="display:flex; justify-content:center; margin-top:81px">
+<img style="width:100%" src="./images/porsche strech pic.jpg" alt="">
 
 </div>
 
-<div style="display:flex; justify-content:center; ">
-
-  <img style="width:80%;" src="./images/wolf.jpg" alt="wolf">
-
-</div>
-
-<div style="display:flex; justify-content:center; ">
-
-  <img style="width:80%;" src="./images/fox.jpg" alt="wolf">
+<div class="mod_article block" id="article-970" >
+    <div class="ce_text _container block" >
+    <div class="text">
+    <h1 style="text-align: center; font-size:3rem">Contact Us</h1>
+    <h2 style="text-align: center;"><span style="color: #808080; font-size:1.5rem">If you have any questions, we look forward to hearing from you</span></h2>
 
 </div>
-
-
-<div style="display:flex; justify-content:center; ">
-
-  <img style="width:80%;" src="./images/owel.jpg" alt="wolf">
-
-</div>
-
-
-
-
-
-
+    </div>
+    </div>
 
 
 
@@ -323,17 +288,17 @@ menuClose.addEventListener("click", () => {
     <div class="footer_main">
     <div class="ce_rsce_flexbox_begin block ce_flexbox ce_4324 " >
     <style type="text/css">.ce_4324>.flexbox_inside>div:nth-child(4){width:calc(27% - ((70px + 70px)/2))}.ce_4324>.flexbox_inside{display:flex;flex-wrap:wrap;position:relative;box-sizing:border-box;margin-top:10px;margin-right:-40px;margin-bottom:40px;margin-left:-40px;justify-content:center;align-items:flex-start}.ce_4324>.flexbox_inside>*{box-sizing:border-box;width:calc(24% - ((70px + 70px)/2));background:rgba(255,255,255,0);margin-top:calc(80px / 2);margin-right:calc(70px / 2);margin-left:calc(70px / 2);padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;transition:all s ease-in-out}.ce_4324>.flexbox_inside>*:hover{transform:scale()}</style>
-    <div >
+    <div class="flexbox_inside">
     <div>
     <div class="ce_text _container block">
     <div class="text">
-    <p style="text-align: center; font-size:2rem"><strong>Contact</strong></p>    </div>
+    <p style="text-align: center; font-size:1.5rem"><strong>Contact</strong></p>    </div>
     </div>
-    <div >
+    <div class="ce_text _container block">
     <div class="text">
     
     
-    <p style="text-align: center;"><strong>CustomWallPrinting@gmail.com</strong></p>
+    <p style="text-align: center;">CustomWallPrinting@gmail.com</p>
     <p style="text-align: center;"><strong>Or</strong></p>
     
     <p style="text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -403,7 +368,7 @@ menuClose.addEventListener("click", () => {
     
     
     </div>
-
+    
     
     
     <script id="_etLoader" type="text/javascript" charset="UTF-8" data-block-cookies="true" data-respect-dnt="true" data-secure-code="i9s1km" src="static.etracker.com/code/e.js"></script>
@@ -490,6 +455,7 @@ e.addEventListener('focusout',toggleClassActive)
 function toggleClassActive(){if(this.value.length==0){if(this===document.activeElement){this.parentElement.classList.add('active')}else{this.parentElement.classList.remove('active')}}else{this.parentElement.classList.add('active')}}})</script>
 
 <script>document.addEventListener("DOMContentLoaded",function(event){if(document.querySelector('.accordion-container')){new Accordion('.accordion-container')}})</script><script type="application/ld+json">{"@context":{"contao":"https:\/\/schema.contao.org\/"},"@type":"contao:Page","contao:title":"CustomWallPrinting Germany - Gallery","contao:pageId":261,"contao:noSearch":false,"contao:protected":false,"contao:groups":[],"contao:fePreview":false}</script>
+
 
 
 
