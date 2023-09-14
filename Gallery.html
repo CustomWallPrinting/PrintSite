@@ -3,47 +3,18 @@
 
 <head>
 <meta charset="utf-8">
-    <meta name="description" content="Custom Wall Printing - Print Any Image on Any Surface">
-    <meta name="keywords" content="custom wall printing, wall decor, wall murals, personalized wall art, custom wall graphics, Canvas Wall Art, 3D Wall Art">
-    <meta name="author" content="Custom Wall Printing">
-    <meta name="robots" content="index, follow">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Custom Wall Printing">
-    <meta property="og:description" content="Transform your space with custom wall printing. We print any image directly on any wall.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.customwallprinting.com">
-    <meta property="og:image" content="https://www.customwallprinting.com/Gallery">
-    
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@CWallprinting">
-    <meta name="twitter:title" content="Custom Wall Printing">
-    <meta name="twitter:description" content="Transform your space with custom wall printing. We print any image directly on any wall.">
-    <meta name="twitter:image" content="https://www.customwallprinting.com/Gallery">
-    
-    <meta name="geo.placename" content="Oregon, OR">
-    
-    <!-- Contact Information Meta Tags -->
-    <meta name="contact.email" content="CustomWallPrinting@gmail.com">
-    <meta name="contact.phone_number" content="+1 (503) 828-5038">
-    
-    <!-- Mobile App Meta Tags (if applicable) -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="WallPrint">
-    
-    <!-- Additional Custom Meta Tags -->
-    <meta name="custom-wall-printing-types" content="Canvas Prints, Wallpaper Murals, Vinyl Decals, Modern Wall Prints, Mural Painting, Wall Art for Hotels, Wall Art for Cafes, Wall Art for Offices, Wall Art for Bedrooms, Wall Art for Living Rooms, Wall Art for Bathrooms, Wall Art for Kitchens, Wall Art for Nurseries, Wall Art for Gyms">
-    <meta name="custom-wall-printing-materials" content="Canvas, Vinyl, Fabric">
-    
-    <title>Custom Wall Printing | Print Any Image on Any Wall</title>
+<title>CustomWallPrinting</title>
+<base >
+<meta name="robots" content="index,follow">
+
+<meta name="description" content="The CustomWallPrinting Printing on almost all surfaces in fantastic quality and brilliant colors. View projects of our customers from all over the world, sorted by surface.">
+
+<meta name="generator" content="Contao Open Source CMS">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <link href='https://css.gg/arrow-left.css' rel='stylesheet'>
-<link rel="icon" href="/images 2/cut.png">
+<link rel="icon" href="/images 2/wall pen whited transparent.png">
 
 <link rel="stylesheet" href="assets/css/layout.min.css%2cresponsive.min.css%2creset.min.css%2cuniversal-toggle...-524c32be.css">
 
@@ -92,11 +63,18 @@
   }
   
   .logo1212 {
+    width:8rem;
     cursor: pointer;
     color: rgb(0, 0, 0);
     font-size:1.8rem;
     font-family: monospace;
     font-weight: 550;
+    text-align: center;
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: .5rem;
+    padding-left: .5rem;
+    margin-right: 7rem;
   }
   
   .nav__links a,
@@ -231,16 +209,14 @@
   
   @media screen and (max-width: 400px) {
       .logo1212 {
-        width:13rem;
+        width:5rem;
       }
     
     }
   
   
     @media screen and (max-width: 303px) {
-      .logo1212 {
-        width:9rem;
-      }
+
 
       .cta1212{
         font-size:.7rem;
@@ -249,6 +225,311 @@
     }
 
 
+ /* Your CSS code here */
+ *,
+        *:before,
+        *:after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #ecf0f1;
+        }
+
+        .wrapper {
+            max-width: 75rem;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 12.5rem);
+            gap: .5rem;
+        }
+
+        /* Gallery Layout */
+        .gallery__item--1 {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+        }
+
+        .gallery__item--2 {
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+        }
+
+        .gallery__item--3 {
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 2;
+        }
+
+        .gallery__item--4 {
+            grid-column: 3 / span 1;
+            grid-row: 1 / span 3;
+        }
+
+        .gallery__item--5 {
+            grid-column: 1 / span 2;
+            grid-row: 3 / span 2;
+        }
+
+        .gallery__item--6 {
+            grid-column: 3 / span 1;
+            grid-row: 4 / span 1;
+        }
+
+        /* Gallery Link */
+        .gallery__link {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Gallery Link Overlay */
+        .gallery__overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+        }
+
+        .gallery__link:hover .gallery__overlay {
+            opacity: 1;
+        }
+
+        /* Gallery Overlay Text */
+        .gallery__overlay span {
+            position: relative;
+            line-height: 3rem;
+        }
+
+        .gallery__overlay span:before,
+        .gallery__overlay span:after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 0;
+            background: #fff;
+            transition: width .3s ease-out .2s;
+        }
+
+        .gallery__overlay span:before {
+            top: 0;
+            left: 0;
+        }
+
+        .gallery__overlay span:after {
+            bottom: 0;
+            right: 0;
+        }
+
+        .gallery__link:hover .gallery__overlay span:before,
+        .gallery__link:hover .gallery__overlay span:after {
+            width: 100%;
+        }
+
+        /* Gallery Image */
+        .gallery__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition:
+                transform .5s,
+                filter .5s;
+        }
+
+        .gallery__link:hover .gallery__image {
+            transform: scale(1.2);
+        }
+
+        /* Add CSS for enlarged image */
+        .enlarged-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            display: none;
+        }
+
+        .enlarged-image img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 12.5rem);
+    gap: 0.5rem;
+}
+
+/* Add media query for 556px - 961px screen width */
+@media screen and (min-width: 556px) and (max-width: 961px) {
+    .gallery {
+        grid-template-columns: repeat(1, 1fr); /* Set to one column */
+    }
+
+    /* Adjust the grid layout for specific items if needed */
+    .gallery__item--1 {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+
+    /* Adjust other items as needed */
+}
+
+
+        /* Add media query for screens less than or equal to 557px */
+        @media screen and (max-width: 557px) {
+            .gallery {
+                grid-template-columns: repeat(1, 1fr); /* Set to one column */
+            }
+
+            /* Adjust the grid layout for specific items if needed */
+            .gallery__item {
+                grid-column: auto; /* Reset grid column to default */
+                grid-row: auto; /* Reset grid row to default */
+            }
+
+            /* Adjust other items as needed */
+        }
+
+                /* Close button */
+                .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+            z-index: 1000;
+        }
+
+        .close-button:hover {
+            color: #ff0000; /* Change the color on hover if desired */
+        }
+
+
+/* Previous and Next buttons */
+.nav-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.prev-button {
+    float: left;
+}
+
+.next-button {
+    float: right;
+}
+
+        /* Close button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+            z-index: 1000;
+        }
+
+        .close-button:hover {
+            color: #ff0000; /* Change the color on hover if desired */
+        }
+
+        /* Enlarged image container */
+        .enlarged-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            display: none;
+            border-radius: 10px; /* Adjust the value for rounded corners */
+        }
+
+        /* Previous and Next buttons */
+        .nav-button {
+            background-color: transparent;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .prev-button {
+            left: 20px;
+        }
+
+        .next-button {
+            right: 20px;
+        }
+
+        /* Hover effect for buttons */
+        .nav-button:hover {
+            color: green;
+        }
+
+
+
+        .prev-button:hover {
+    color: #aa0000; /* Text color remains white */
+}
 </style>
 
 
@@ -260,7 +541,7 @@
     
 <div id="wrapper1212">
   <header style="position:fixed; top:0; width:100%; z-index: 10; padding: 0">
-    <a style="text-align: center; margin: 0; padding-top: 1rem; padding-bottom: .7rem" class="logo1212" href="index"><img style="width:19rem" src="./images/ma logo.png" alt="CustomWallPrinting"></a>
+    <a class="logo1212" href="index"><img src="./images/more.png" alt="CustomWallPrinting"></a>
     <nav>
         <ul style="text-align: center; margin: 0; font-size: 1.3rem;" class="nav__links">
             <li><a  href="Gallery">Gallery</a></li>
@@ -314,352 +595,432 @@ menuClose.addEventListener("click", () => {
 
 
 
-<div  id="container">
-<main id="main">
-<div class="inside">
-<div class="mod_article block" id="article-970">
-<div class="ce_text _container block" >
-<div class="text">
+<div>
+
+
+
+<div style="padding-top:5rem; padding-bottom:5rem; background-color:rgb(236, 236, 236)">
 <h1 style="text-align: center;">Gallery</h1>
-<h2 style="text-align: center;"><span style="color: #808080;">Here are just a few examples of wall Printing on various materials, besides many more videos and pictures on <a href="https://www.instagram.com/CustomWallPrinting" target="_blank" rel="noopener">Instagram</a></span></h2>    </div>
-</div>
-</div>
-<div style="padding-top:20px" class="mod_article block" id="article-954">
-<div class="ce_gallery ivp fadeinup block">
-<h1>Printed on Plaster</h1>
-
-
-<div class="fleximages_4391 flex-images" itemscope itemtype="http://schema.org/ImageGallery">
-<a class="item" href="images/CustomWallPrinting_wallprint_Brickwall-76c9a8ce.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-
-
-<img src="images/CustomWallPrinting_wallprint_Brickwall-adf839c9.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-
-
-<a class="item" href="images/CustomWallPrinting_wallprint_Porsche%20(1)-ea7b68b4.jpg" data-lightbox="lb4391" data-w="400" data-h="225"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-
-<img src="images/CustomWallPrinting_wallprint_Porsche%20(1)-a1400917.jpg"  width="400" height="225" alt="" loading="lazy" data-w="400" data-h="225" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_Porsche%20(2)-29730d8d.jpg" data-lightbox="lb4391" data-w="400" data-h="225"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-
-<img src="images/CustomWallPrinting_wallprint_Porsche%20(2)-ca031032.jpg"  width="400" height="225" alt="" loading="lazy" data-w="400" data-h="225" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_Porsche%20(3)-9e2b0ed9.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_Porsche%20%283%29-7c8abb2b.webp 1x, images/CustomWallPrinting_wallprint_Porsche%20%283%29-e31335f4.webp 1.5x, images/CustomWallPrinting_wallprint_Porsche%20%283%29-3e024f1e.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_Porsche%20(3)-373fc8c1.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_School-of-technology-Bologna-49bda73b.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="assets/images/0/CustomWallPrinting_wallprint_School-of-technology-Bologna-e987446e.webp 1x, images/CustomWallPrinting_wallprint_School-of-technology-Bologna-133dc663.webp 1.5x, images/CustomWallPrinting_wallprint_School-of-technology-Bologna-4051b0e4.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_School-of-technology-Bologna-fe2b041e.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin%20(2)-505ae564.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin%20%282%29-0e96c3e6.webp 1x, images/CustomWallPrinting_wallprint_companies_Drivery-Berlin%20%282%29-e14b4144.webp 1.5x, images/CustomWallPrinting_wallprint_companies_Drivery-Berlin%20%282%29-307e65ca.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin%20(2)-ac979764.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin-56a80f5e.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin-47aa0691.webp 1x, images/CustomWallPrinting_wallprint_companies_Drivery-Berlin-f5db7f3c.webp 1.5x, assets/images/0/CustomWallPrinting_wallprint_companies_Drivery-Berlin-5c0a41ea.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin-d6775a55.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_companies_gym%20(1)-1baaef81.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_companies_gym%20%281%29-123eeb20.webp 1x, images/CustomWallPrinting_wallprint_companies_gym%20%281%29-ea88bc88.webp 1.5x, images/CustomWallPrinting_wallprint_companies_gym%20%281%29-c2a51031.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_companies_gym%20(1)-06352076.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_companies_gym%20(2)-1fa356fc.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_companies_gym%20%282%29-0a7eacb5.webp 1x, images/CustomWallPrinting_wallprint_companies_gym%20%282%29-efbcfec1.webp 1.5x, images/CustomWallPrinting_wallprint_companies_gym%20%282%29-b88c3e65.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_companies_gym%20(2)-25627ab9.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy%20(5)-5d0d0d0d.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy%20%285%29-947bf1cf.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%285%29-bd66bec1.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%285%29-26e2b7b4.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy%20(5)-ed6b8a44.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="./images/fox.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="./images/fox.jpg, images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20%281%29-31bb0233.webp 1.5x, ./images/fox.jpg" type="image/webp">
-<img src="./images/fox.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20(2)-259d2183.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20%282%29-d7c7072d.webp 1x, images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20%282%29-79f4ac5a.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20%282%29-97736e6d.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy_Ladies-and-Gentlemen%20(2)-0ee4772c.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hospital%20(1)-8de5f577.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hospital%20%281%29-e46e87c1.webp 1x, images/CustomWallPrinting_wallprint_hospital%20%281%29-01a55131.webp 1.5x, images/CustomWallPrinting_wallprint_hospital%20%281%29-a14f2e4c.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hospital%20(1)-f20deb3c.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hospital%20(2)-083bd7ac.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hospital%20%282%29-04876dbc.webp 1x, images/CustomWallPrinting_wallprint_hospital%20%282%29-4dd29b0e.webp 1.5x, images/CustomWallPrinting_wallprint_hospital%20%282%29-c893185f.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hospital%20(2)-babc206e.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(1)-da4b95d0.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%281%29-56b162f5.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%281%29-237fa78c.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%281%29-885c2d70.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(1)-5eb5f6db.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(2)-f0cc1ece.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%282%29-b0cb62f6.webp 1x, assets/images/0/CustomWallPrinting_wallprint_hotel%20%282%29-a5b5bca8.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%282%29-51430830.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(2)-1a98cac1.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(3)-0a389457.jpg" data-lightbox="lb4391" data-w="400" data-h="280"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%283%29-2ce9b61d.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%283%29-1f4286e2.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%283%29-53125f68.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(3)-0092af43.jpg"  width="400" height="280" alt="" loading="lazy" data-w="400" data-h="280" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(4)-e14a503f.jpg" data-lightbox="lb4391" data-w="400" data-h="194"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%284%29-f8e6912c.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%284%29-685ba8fb.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%284%29-6a6378b6.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(4)-c473b7d9.jpg"  width="400" height="194" alt="" loading="lazy" data-w="400" data-h="194" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(5)-161da853.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%285%29-90908c41.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%285%29-bd4cbd1a.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%285%29-e410475d.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(5)-79fd3dbb.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel%20(6)-626d52f5.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%286%29-8cd2c944.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%286%29-f94d3a52.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%286%29-3ff7893d.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel%20(6)-f441ab0f.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_hotel (7)-40edf663.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_hotel%20%287%29-58be5c1f.webp 1x, images/CustomWallPrinting_wallprint_hotel%20%287%29-ebf6686a.webp 1.5x, images/CustomWallPrinting_wallprint_hotel%20%287%29-68e977b0.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_hotel (7)-b86ff8dd.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20(1)-15bb3dd6.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%281%29-d47a410c.webp 1x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%281%29-5523ae93.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%281%29-491faa19.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20(1)-2efb4cab.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck (2)-13d9a65d.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%282%29-a82556d8.webp 1x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%282%29-09c10afb.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%282%29-adc73d98.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck (2)-e03acc22.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20(3)-6671541a.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%283%29-cd41559f.webp 1x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%283%29-0cf1aff3.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20%283%29-206324cf.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Gedenstaette-Ravensbrueck%20(3)-c0d08716.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Leeuwarden (1)-bd1b7fbb.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%281%29-e17b23bd.webp 1x, images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%281%29-fed2e1a3.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%281%29-b09432f0.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Leeuwarden (1)-de2c949e.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Leeuwarden%20(2)-c2f91e74.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%282%29-cf4c4191.webp 1x, images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%282%29-839cad8b.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Leeuwarden%20%282%29-c9cecedf.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Leeuwarden%20(2)-5fee874e.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz%20(1)-5ae63976.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%281%29-2000696d.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%281%29-f1824a0d.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%281%29-5975dca1.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz%20(1)-aaa4b985.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz%20(2)-e2494287.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%282%29-de788552.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%282%29-0db98f94.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%282%29-27e2cc78.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz%20(2)-e08a0c3c.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz%20(3)-fa994e85.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%283%29-42148872.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%283%29-3ab43065.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%283%29-2e60c5d1.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz%20(3)-a1650f8e.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz (4)-194718fd.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%284%29-d0168e19.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%284%29-78081197.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%284%29-afd40bcf.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz (4)-b3759d09.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz%20(5)-1373fada.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%285%29-1c8205ca.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%285%29-78c67a8d.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%285%29-ae8620e7.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz%20(5)-281701d5.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz%20(6)-fc842f54.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%286%29-53c4a8d4.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%286%29-2417a065.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%286%29-f0e2a9ad.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz%20(6)-ee2c13aa.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum-Mainz (7)-ea9097f1.jpg" data-lightbox="lb4391" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum-Mainz%20%287%29-b0438263.webp 1x, images/CustomWallPrinting_wallprint_museum-Mainz%20%287%29-baf8f82c.webp 1.5x, images/CustomWallPrinting_wallprint_museum-Mainz%20%287%29-2d6c3a94.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum-Mainz (7)-5b6c49e7.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_museum_France-df1886e8.jpg" data-lightbox="lb4391" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_museum_France-b970a00d.webp 1x, images/CustomWallPrinting_wallprint_museum_France-53e91fc1.webp 1.5x, images/CustomWallPrinting_wallprint_museum_France-b648832c.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_museum_France-e86bcd1b.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-</div>
-<script>new flexImages({selector:'.fleximages_4391',rowHeight:'300'})</script>
-</div>
-</div>
-<div class="mod_article block" id="article-957">
-<div class="ce_gallery ivp fadeinup block">
-<h1>Printed on Concrete</h1>
-
-
-
-<div class="fleximages_4400 flex-images" itemscope itemtype="http://schema.org/ImageGallery">
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy (1)-fa61a358.jpg" data-lightbox="lb4400" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="assets/images/0/CustomWallPrinting_wallprint_gastronomy%20%281%29-ddb386d9.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%281%29-a4eac49a.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%281%29-1f39e3e4.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy%20(1)-5b641de8.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy (2)-dc809486.jpg" data-lightbox="lb4400" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy%20%282%29-b25da3f2.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%282%29-84bbd512.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%282%29-af89949f.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy (2)-89a5e0bc.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy%20(3)-d05b59ff.jpg" data-lightbox="lb4400" data-w="400" data-h="533"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy%20%283%29-9bfcc3fa.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%283%29-55ffa4ad.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%283%29-a6dacb2e.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy%20(3)-867d7935.jpg"  width="400" height="533" alt="" loading="lazy" data-w="400" data-h="533" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy%20(6)-373f97a4.jpg" data-lightbox="lb4400" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy%20%286%29-0120da89.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%286%29-ea4818f4.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%286%29-3494c732.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy%20(6)-3ff2c38d.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-</div>
-<script>new flexImages({selector:'.fleximages_4400',rowHeight:'300'})</script>
-</div>
-</div>
-<div class="mod_article block" id="article-958">
-<div class="ce_gallery ivp fadeinup block">
-<h1>Printed on Glass</h1>
-
-
-<div class="fleximages_4401 flex-images" itemscope itemtype="http://schema.org/ImageGallery">
-<a class="item" href="images/CustomWallPrinting_wallprint_glass%20(1)-5bbe4f89.jpg" data-lightbox="lb4401" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_glass%20%281%29-e22d5f50.webp 1x, images/CustomWallPrinting_wallprint_glass%20%281%29-4494c29b.webp 1.5x, images/CustomWallPrinting_wallprint_glass%20%281%29-af244256.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_glass%20(1)-e4bebad4.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_glass%20(2)-3e72b384.jpg" data-lightbox="lb4401" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_glass%20%282%29-23c58468.webp 1x, images/CustomWallPrinting_wallprint_glass%20%282%29-3951a4ec.webp 1.5x, images/CustomWallPrinting_wallprint_glass%20%282%29-22654976.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_glass%20(2)-2fbf3474.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_glass%20(3)-afd2b90b.jpg" data-lightbox="lb4401" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_glass%20%283%29-dc1d7710.webp 1x, images/CustomWallPrinting_wallprint_glass%20%283%29-276714a5.webp 1.5x, images/CustomWallPrinting_wallprint_glass%20%283%29-f9990bd3.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_glass%20(3)-97ff4d1e.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_glass_fly-e9ce59e2.png" data-lightbox="lb4401" data-w="400" data-h="400"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_glass_fly-5e82850d.webp 1x, images/CustomWallPrinting_wallprint_glass_fly-ccb7043b.webp 1.5x, images/CustomWallPrinting_wallprint_glass_fly-8d701bbd.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_glass_fly-70d6d56a.png"  height="400" alt="" loading="lazy" data-w="400" data-h="400" itemprop="image">
-
-</a>
-</div>
-<script>new flexImages({selector:'.fleximages_4401',rowHeight:'300'})</script>
-</div>
-</div>
-<div class="mod_article block" id="article-955">
-<div class="ce_gallery ivp fadeinup block">
-<h1>Printed on Wood</h1>
-<div class="fleximages_4396 flex-images" itemscope itemtype="http://schema.org/ImageGallery">
-<a class="item" href="images/CustomWallPrinting_wallprint_wood-1-6e3e0c6c.jpg" data-lightbox="lb4396" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_wood-1-36bb6f7f.webp 1x, images/CustomWallPrinting_wallprint_wood-1-e7cc5e6c.webp 1.5x, images/CustomWallPrinting_wallprint_wood-1-b72a3196.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_wood-1-aeac86c6.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_wood-2-4577b28d.jpg" data-lightbox="lb4396" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_wood-2-56810647.webp 1x, images/CustomWallPrinting_wallprint_wood-2-75c4451d.webp 1.5x, images/CustomWallPrinting_wallprint_wood-2-c58c1f25.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_wood-2-5661342c.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_wood_dog-a0054d32.jpg" data-lightbox="lb4396" data-w="400" data-h="300"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_wood_dog-dd9629c4.webp 1x, images/CustomWallPrinting_wallprint_wood_dog-0400142f.webp 1.5x, images/CustomWallPrinting_wallprint_wood_dog-5ea499c8.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_wood_dog-db8a2dad.jpg"  width="400" height="300" alt="" loading="lazy" data-w="400" data-h="300" itemprop="image">
-
-</a>
-
+<h2 style="text-align: center;"><span style="color: #808080;">Here are just a few examples of wall Printing on various surfaces and styles, besides many more videos and pictures on <a href="https://www.instagram.com/CustomWallPrinting" target="_blank" rel="noopener" style="color: #267c23;">Instagram</a></span></h2>    </div>
 
 </div>
-<script>new flexImages({selector:'.fleximages_4396',rowHeight:'300'})</script>
+
 </div>
 </div>
-<div class="mod_article block" id="article-968">
-<div class="ce_gallery ivp fadeinup block">
-<h1>Other material</h1>
 
-
-<div class="fleximages_4427 flex-images" itemscope itemtype="http://schema.org/ImageGallery">
-<a class="item" href="images/CustomWallPrinting_wallprint_gastronomy%20(4)-fdb14164.jpg" data-lightbox="lb4427" data-w="400" data-h="267"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_gastronomy%20%284%29-b5deabf8.webp 1x, images/CustomWallPrinting_wallprint_gastronomy%20%284%29-512d12a7.webp 1.5x, images/CustomWallPrinting_wallprint_gastronomy%20%284%29-48643a63.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_gastronomy%20(4)-bae20621.jpg"  width="400" height="267" alt="" loading="lazy" data-w="400" data-h="267" itemprop="image">
-
-</a>
-<a class="item" href="images/CustomWallPrinting_wallprint_metal_deer-8a8bac71.jpg" data-lightbox="lb4427" data-w="400" data-h="533"  itemprop="contentUrl" itemscope itemtype="http://schema.org/ImageObject">
-
-<source srcset="images/CustomWallPrinting_wallprint_metal_deer-efe4c1dd.webp 1x, images/CustomWallPrinting_wallprint_metal_deer-bc7e8147.webp 1.5x, images/CustomWallPrinting_wallprint_metal_deer-a07f482a.webp 2x" type="image/webp">
-<img src="images/CustomWallPrinting_wallprint_metal_deer-35412ec4.jpg"  width="400" height="533" alt="" loading="lazy" data-w="400" data-h="533" itemprop="image">
-
-</a>
+<div class="wrapper">
+  <!-- Your existing HTML code goes here -->
+  <!-- ... (rest of your HTML code) ... -->
 </div>
-<script>new flexImages({selector:'.fleximages_4427',rowHeight:'300'})</script>
+
+<!-- Enlarged image container -->
+
+
+<div class="wrapper">
+
+  <div class="gallery">
+    <div class="gallery__item gallery__item--1">
+      <a href="#" class="gallery__link">
+          <img src="/images/DSCF3236.jpg" class="gallery__image" />
+          <div class="gallery__overlay">
+              <span>Human Eye</span>
+          </div>
+      </a>
+  </div> 
+      <div class="gallery__item gallery__item--2">
+          <a href="#" class="gallery__link">
+              <img src="images/Copy of Pedego Mural.JPG" class="gallery__image" />
+              <div class="gallery__overlay">
+                  <span>Pedego Mural</span>
+              </div>
+          </a>
+      </div>
+      <div class="gallery__item gallery__item--3">
+          <a href="#" class="gallery__link">
+              <img src="images/IMG_20230827_125238.jpg" class="gallery__image" />
+              <div class="gallery__overlay">
+                  <span>16Ft 3d Print</span>
+              </div>
+          </a>
+      </div>
+      <div class="gallery__item gallery__item--4">
+          <a href="#" class="gallery__link">
+              <img src="images/IMG_20230827_125241.jpg" class="gallery__image" />
+              <div class="gallery__overlay">
+                  <span>16Ft 3d Print</span>
+              </div>
+          </a>
+      </div>
+      <div class="gallery__item gallery__item--5">
+          <a href="#" class="gallery__link">
+              <img src="images/71970631_159113801856533_8682995039891331004_n.jpg" class="gallery__image" />
+              <div class="gallery__overlay">
+                  <span>Huge Warehouse Mural</span>
+              </div>
+          </a>
+      </div>
+      <div class="gallery__item gallery__item--6">
+          <a href="#" class="gallery__link">
+              <img src="images/CustomWallPrinting_wallprint_hotel (5)-161da853.jpg" class="gallery__image" />
+              <div class="gallery__overlay">
+                  <span>Double Exposure Squirrel</span>
+              </div>
+          </a>
+      </div>
+      <div class="gallery__item gallery__item--7">
+        <a href="#" class="gallery__link">
+            <img src="images/wolf.jpg" class="gallery__image" />
+            <div class="gallery__overlay">
+                <span>Double Exposure Wolf</span>
+            </div>
+        </a>
+    </div>      
+      <div class="gallery__item gallery__item--8">
+        <a href="#" class="gallery__link">
+            <img src="images/owel.jpg" class="gallery__image" />
+            <div class="gallery__overlay">
+                <span>Double Exposure Owl</span>
+            </div>
+        </a>
+    </div>      
+    <div class="gallery__item gallery__item--9">
+      <a href="#" class="gallery__link">
+          <img src="images/Ski Resort 1.jpg" class="gallery__image" />
+          <div class="gallery__overlay">
+              <span>Double Exposure</span>
+          </div>
+      </a>
+  </div> 
+  <div class="gallery__item gallery__item--10">
+    <a href="#" class="gallery__link">
+        <img src="images/Copy of IMG_3847 (1).JPG" class="gallery__image" />
+        <div class="gallery__overlay">
+            <span>Created Print</span>
+        </div>
+    </a>
+</div> 
+<div class="gallery__item gallery__item--11">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3849.JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Created Print</span>
+      </div>
+  </a>
+</div>     
+<div class="gallery__item gallery__item--12">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3752 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Cafe Whale</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--13">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3779 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Cafe Whale</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--14">
+  <a href="#" class="gallery__link">
+      <img src="images/DSC_2049 Kopie (2).jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Faded Mountain</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--15">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_gastronomy (6)-373f97a4.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Print On Concrete</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--16">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_gastronomy (1)-fa61a358.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Print On Concrete</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--17">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3973 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>City Print</span>
+      </div>
+  </a>
+</div>     
+<div class="gallery__item gallery__item--18">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3975 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>City Print</span>
+      </div>
+  </a>
+</div>   
+<div class="gallery__item gallery__item--19">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3974 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>City Print</span>
+      </div>
+  </a>
 </div>
+<div class="gallery__item gallery__item--20">
+  <a href="#" class="gallery__link">
+      <img src="images/GoldenGate.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Paper illusion Print</span>
+      </div>
+  </a>
 </div>
+<div class="gallery__item gallery__item--21">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201918.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Hallway Art</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--22">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201920.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Hallway Art</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--23">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201921.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Hallway Art</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--24">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201924.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Hallway Art</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--25">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of DSC09041.JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Door Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--26">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of DSC09053.JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Door Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--27">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of DSC09076.JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Door Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--28">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of DSC09078.JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Door Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--29">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3355 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Car Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--30">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_3359 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Car Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--31">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_companies_Drivery-Berlin (2)-505ae564.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Delorean Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--32">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_Porsche (2)-29730d8d.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Porsche Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--33">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_Porsche (1)-ea7b68b4.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Porsche Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--34">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of WhatsApp Image 2020-05-13 at 14.02.08.jpeg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Old Scroll Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--35">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of WhatsApp Image 2020-05-13 at 14.02.08 (1).jpeg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Old Scroll Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--36">
+  <a href="#" class="gallery__link">
+      <img src="images/CustomWallPrinting_wallprint_Brickwall-76c9a8ce.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Printed Brick Illusion</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--37">
+  <a href="#" class="gallery__link">
+      <img src="images/Butterfly.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Butterfly Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--38">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_4961 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Text Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--39">
+  <a href="#" class="gallery__link">
+      <img src="images/Copy of IMG_4943 (1).JPG" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Text Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--40">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201915.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Logo Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--41">
+  <a href="#" class="gallery__link">
+      <img src="images/Image-201916.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Logo Print</span>
+      </div>
+  </a>
+</div>
+<div class="gallery__item gallery__item--42">
+  <a href="#" class="gallery__link">
+      <img src="images/Window Blind.jpg" class="gallery__image" />
+      <div class="gallery__overlay">
+          <span>Print On Blinds</span>
+      </div>
+  </a>
+</div>
+      <!-- Add more gallery items here -->
+  </div>
+
+  <!-- Enlarged image container -->
+  <div class="enlarged-image" id="enlarged-image">
+    <button id="close-button" class="close-button">X</button>
+    <img id="enlarged-img" src="" alt="Enlarged Image">
+    <button id="prev-button" class="nav-button prev-button">&#9664; </button>
+    <button id="next-button" class="nav-button next-button"> &#9654;</button>
+</div>
+
+</div>
+
+    <!-- JavaScript code for the image gallery functionality -->
+    <script>
+const galleryItems = document.querySelectorAll('.gallery__item');
+const enlargedImage = document.getElementById('enlarged-image');
+const enlargedImg = document.getElementById('enlarged-img');
+const nextButton = document.getElementById('next-button');
+const prevButton = document.getElementById('prev-button');
+
+let currentIndex = 0;
+
+// Function to display the current image
+function displayImage(index) {
+    const imageSrc = galleryItems[index].querySelector('.gallery__image').src;
+    enlargedImg.src = imageSrc;
+}
+
+// Function to handle next button click
+function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    displayImage(currentIndex);
+}
+
+// Function to handle previous button click
+function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    displayImage(currentIndex);
+}
+
+galleryItems.forEach((item, index) => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = index;
+        displayImage(currentIndex);
+        enlargedImage.style.display = 'flex';
+    });
+});
+
+nextButton.addEventListener('click', nextImage);
+prevButton.addEventListener('click', prevImage);
+
+enlargedImage.addEventListener('click', (e) => {
+    if (e.target === enlargedImage) {
+        enlargedImage.style.display = 'none';
+    }
+});
+
+const closeButton = document.getElementById('close-button');
+
+closeButton.addEventListener('click', () => {
+    enlargedImage.style.display = 'none';
+});
+  </script>
+
 </div>
 </main>
 </div>
