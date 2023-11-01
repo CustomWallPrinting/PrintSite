@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Height Calculator</title>
+
+
+    <style>
+
+
+html{
+    background-color: rgb(30, 32, 32);
+}
+
+body{
+            height: 100vh;
+            margin: 0 auto;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        button{
+            cursor: pointer;
+        }
+
+
+        a{
+            display: none;
+        }
+
+        h1{
+            color: white;
+            font-size: 1.6em;
+        }
+
+.container{
+        display: flex;
+        justify-content: center;
+        flex-direction:column;
+        align-items: center;
+        height:100%;
+    }
+
+
+
+    .hide{
+        display: none;
+    }
+
+    .startButton{
+            font-size:2.5rem;
+            color:white;
+            background-color:rgb(0, 175, 93);
+            border-radius:10px;
+            border: 4px solid white;
+            margin-top: 1rem;
+            padding-left:.5rem;
+            padding-right:.5rem;
+            position: relative;
+            animation-name: startButton;
+            animation-duration: 1s;
+
+    }
+
+
+    .input1{
+        font-size:100%;
+        
+    }
+
+    .axisImages{
+        height:20rem;
+    }
+    *, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: rgb(73, 73, 73);
+  width: 500px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  color: aliceblue;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+    </style>
+
+
+</head>
+<body scroll="no" style="overflow: hidden">
+    
+
+
+
+
+
+    <div id="container" class="container">
+
+<h1 id="num1" style="color: white">1. What is the height from the tracks to the ceiling?</h1>
+    <h1 id="num2" style="color: white; margin-top:0rem">2. Or the height from the floor to the ceiling(Without tracks)?</h1>
+
+
+    <input class="input1"id="input1" placeholder="Height in inches" type="text">
+
+    <h1 id="l"class="hide"></h1>
+
+    <h1 id="xl"class="hide"></h1>
+
+    <h1 id="ml"class="hide"></h1>
+
+    <h1 id="m"class="hide"></h1>
+
+    <h1 id="s"class="hide"></h1>
+
+    <h1 id="xs"class="hide"></h1>
+
+    <h1 id="noMore"class="hide"></h1>
+
+    <h1 id="aHeightHtml"class="hide"></h1>
+
+    <button id="startButton" class="startButton">Calculate</button>
+
+    </div>
+
+    <span id="questionButton" style="color:rgb(255, 255, 255); cursor: pointer; border:1px solid rgb(255, 255, 255); border-radius:50%; padding: 0.2rem; padding-left: 0.4rem; padding-right: 0.4rem; position: fixed; top: 0; right: 0; margin-top:0.5rem; margin-right: 0.5rem;">&#63;</span>
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div style="color: white;" class="title">Axis sizes and description</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h3>Starting point is Base axis + 1 large axis(Axis A)</h2>
+        <h3>Extra Small(1):       4inch      </h2>
+        <h3>Small(1):                 8inch    </h2>
+        <h3>Medium(1):           12inch   </h2>      
+        <h3>Medium Large(1): 19.75inch </h2>
+        <h3>Large(A & B):    27.5inch   </h2>
+        <h3>Extra Large(2):     31.5inch </h2>            
+        </div>
+    </div>
+    <div id="overlay"></div>
+
+
+
+<script>
+
+let startButton = document.getElementById("startButton");
+let num1 = document.getElementById("num1");
+let num2 = document.getElementById("num2");
+let input1 = document.getElementById("input1");
+
+
+let l = document.getElementById("l");
+let xl = document.getElementById("xl");
+let ml = document.getElementById("ml");
+let m = document.getElementById("m");
+let s = document.getElementById("s");
+let xs = document.getElementById("xs");
+let noMore = document.getElementById("noMore");
+let aHeightHtml = document.getElementById("aHeightHtml");
+let backHome = 0;
+
+
+let lValue = 0;
+let xlValue = 0;
+let mlValue = 0;
+let mValue = 0;
+let sValue = 0;
+let xsValue = 0;
+let aHeight = 0;
+
+let firstTime = localStorage.getItem('firstTime');
+firstTime = firstTime * 1;
+firstTime = parseFloat(firstTime).toFixed(0);
+localStorage.setItem('firstTime', firstTime);
+firstTime = localStorage.getItem('firstTime');
+firstTime = firstTime * 1;
+
+
+let standardHeight = 66;
+
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+let questionButton = document.getElementById("questionButton");
+
+
+
+questionButton.addEventListener("click", function(){
+  openModal(modal);
+})
+
+overlay.addEventListener('click', () => {
+  const modals = document.querySelectorAll('.modal.active')
+  modals.forEach(modal => {
+    closeModal(modal)
+  })
+})
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = button.closest('.modal')
+    closeModal(modal)
+  })
+})
+
+function openModal(modal) {
+  if (modal == null) return
+  modal.classList.add('active')
+  overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+  if (modal == null) return
+  modal.classList.remove('active')
+  overlay.classList.remove('active')
+}
+
+
+if(firstTime === 1){
+    console.log("ran code");
+    firstTime = 1;
+
+startButton.addEventListener('click',function(){
+
+    if(backHome == 0){
+
+        backHome = 1
+    
+
+    let userHeight = input1.value;
+    console.log(userHeight);
+    let originalDesiredHeight = input1.value;
+
+
+    num1.classList.add("hide");
+    questionButton.classList.add("hide");
+    num2.classList.add("hide");
+    input1.classList.add("hide");
+    startButton.innerHTML = "Reset";
+    startButton.style.backgroundColor = "red"
+
+
+
+
+    if(standardHeight < userHeight & userHeight >= 70.4){
+
+        
+
+        console.log("standard height is smaller than user height");
+
+            if(userHeight >=  70.4 & userHeight <= 74.4){
+            console.log(userHeight);
+            aHeight = aHeight +  70;
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 74.4 & userHeight <= 78.8){
+            console.log(userHeight);
+            aHeight = aHeight + 74;
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S"; 
+            
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 78.8 & userHeight <= 82.4){
+            console.log(userHeight);
+            aHeight = aHeight + 78.4;
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+            
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 82.4 & userHeight <= 86.4){
+            console.log(userHeight);
+            aHeight = aHeight + 82;
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }if(userHeight >= 86.4 & userHeight <= 90.15){
+            console.log(userHeight);
+            aHeight = aHeight + 86;
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";  
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 90 & userHeight <= 94.3){
+            console.log(userHeight);
+            aHeight = aHeight + 89.75;
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML"; 
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 94.3 & userHeight <= 97.9){
+            console.log(userHeight);
+            aHeight = aHeight + 93.9;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 97.9 & userHeight <= 98.55){
+            console.log(userHeight);
+            aHeight = aHeight + 97.5;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 98.55 & userHeight <= 101.9){
+            console.log(userHeight);
+            aHeight = aHeight + 98.15;
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 101.9 & userHeight <= 104.15){
+            console.log(userHeight);
+            aHeight = aHeight + 101.5;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 104.15 & userHeight <= 106.15){
+            console.log(userHeight);
+            aHeight = aHeight + 103.75;
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 106.15 & userHeight <= 109.9){
+            console.log(userHeight);
+            aHeight = aHeight + 105.75;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 106.15 & userHeight <= 109.9){
+            console.log(userHeight);
+            aHeight = aHeight + 105.75;
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";  
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 109.9 & userHeight <= 113.9){
+            console.log(userHeight);
+            aHeight = aHeight + 109.5;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL"; 
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 113.9 & userHeight <= 117.9){
+            console.log(userHeight);
+            aHeight = aHeight + 113.5;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S"; 
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 117.9 & userHeight <= 121.65){
+            console.log(userHeight);
+            aHeight = aHeight + 117.5;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S"; 
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 121.65 & userHeight <= 125.8){
+            console.log(userHeight);
+            aHeight = aHeight + 121.25;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 125.8 & userHeight <= 126.65){
+            console.log(userHeight);
+            aHeight = aHeight + 125.4;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 126.65 & userHeight <= 129.65){
+            console.log(userHeight);
+            aHeight = aHeight + 126.25;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L"; 
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";   
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 129.65 & userHeight <= 129.8){
+            console.log(userHeight);
+            aHeight = aHeight + 129.25;
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";   
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 129.4 & userHeight <= 133.4){
+            console.log(userHeight);
+            aHeight = aHeight + 129;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 133.4 & userHeight <= 133.65){
+            console.log(userHeight);
+            aHeight = aHeight + 133;
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 133.65 & userHeight <= 137.4){
+            console.log(userHeight);
+            aHeight = aHeight + 133.25; 
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 137.4 & userHeight <= 137.65){
+            console.log(userHeight);
+            aHeight = aHeight + 137; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 137.65 & userHeight <= 141.4){
+            console.log(userHeight);
+            aHeight = aHeight + 137.25; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL"; 
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";    
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 141.4 & userHeight <= 145.15){
+            console.log(userHeight);
+            aHeight = aHeight + 141; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";  
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";  
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 145.15 & userHeight <= 145.4){
+            console.log(userHeight);
+            aHeight = aHeight + 144.75; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";  
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";  
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 145.4 & userHeight <= 149.4){
+            console.log(userHeight);
+            aHeight = aHeight + 145; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";  
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";  
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 149.4 & userHeight <= 153.15){
+            console.log(userHeight);
+            aHeight = aHeight + 149; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 153.15 & userHeight <= 157.15){
+            console.log(userHeight);
+            aHeight = aHeight + 152.75; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";   
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 157.15 & userHeight <= 160.9){
+            console.log(userHeight);
+            aHeight = aHeight + 156.75; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";        
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 160.9 & userHeight <= 161.15){
+            console.log(userHeight);
+            aHeight = aHeight + 160.5; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";        
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";   
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 161.15 & userHeight <= 161.55){
+            console.log(userHeight);
+            aHeight = aHeight + 160.75; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";     
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";   
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 161.55 & userHeight <= 164.9){
+            console.log(userHeight);
+            aHeight = aHeight + 161.15; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";        
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";;   
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";   
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 164.9 & userHeight <= 165.15){
+            console.log(userHeight);
+            aHeight = aHeight + 164.5; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";       
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S"; 
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 165.15 & userHeight <= 169.15){
+            console.log(userHeight);
+            aHeight = aHeight + 164.75; 
+            xlValue = xlValue + 1;
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL"; 
+                
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 169.15 & userHeight <= 172.9){
+            console.log(userHeight);
+            aHeight = aHeight + 168.75; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";     
+               
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 172.9 & userHeight <= 176.9){
+            console.log(userHeight);
+            aHeight = aHeight + 172.5; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";    
+
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 176.9 & userHeight <= 180.65){
+            console.log(userHeight);
+            aHeight = aHeight + 176.65; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 180.65 & userHeight <= 184.65){
+            console.log(userHeight);
+            aHeight = aHeight + 180.25; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 184.65 & userHeight <= 189.05){
+            console.log(userHeight);
+            aHeight = aHeight + 184.25; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 189.05 & userHeight <= 192.65){
+            console.log(userHeight);
+            aHeight = aHeight + 188.65; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";  
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 192.65 & userHeight <= 196.65){
+            console.log(userHeight);
+            aHeight = aHeight + 192.25; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";  
+
+            xsValue = xsValue + 1;
+            xs.classList.remove("hide");
+            xs.innerHTML = "+ " + xsValue +"-XS";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }else if(userHeight >= 196.65){
+            console.log(userHeight);
+            aHeight = aHeight + 196.25; 
+            xlValue = xlValue + 1;
+            xlValue = xlValue + 1;  
+            xl.classList.remove("hide");    
+            xl.innerHTML = "+ " + xlValue +"-XL";    
+            
+            l.classList.remove("hide");       
+            lValue = lValue + 1;
+            l.innerHTML = "+ " + lValue +"-L";    
+               
+
+            mlValue = mlValue + 1;
+            ml.classList.remove("hide");
+            ml.innerHTML = "+ " + mlValue +"-ML";
+
+            mValue = mValue + 1;
+            m.classList.remove("hide");
+            m.innerHTML = "+ " + mValue +"-M";  
+
+            sValue = sValue + 1;
+            s.classList.remove("hide");
+            s.innerHTML = "+ " + sValue +"-S";
+
+            noMore.classList.remove("hide");
+            aHeightHtml.classList.remove("hide");
+            noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+            aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+            console.log("the most you can put");
+        }
+
+        
+        
+
+
+
+
+    }else if(userHeight <= 70.399999999999999999999999999999999999999999999 & userHeight > 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001){
+        noMore.classList.remove("hide");
+        noMore.innerHTML = "You don't need to add more"
+    }else{
+        noMore.classList.remove("hide");
+        noMore.innerHTML = "Error: Add your height in inches"
+    }
+
+
+    }else{
+        location.reload();
+    }
+ 
+    
+})
+
+
+}else if(firstTime === 0){
+    console.log("ran code");
+    openModal(modal);
+    firstTime = firstTime * 1;
+    firstTime = 1;
+    localStorage.setItem('firstTime' , firstTime);
+
+    startButton.addEventListener('click',function(){
+
+if(backHome == 0){
+
+    backHome = 1
+
+
+let userHeight = input1.value;
+console.log(userHeight);
+let originalDesiredHeight = input1.value;
+
+
+num1.classList.add("hide");
+questionButton.classList.add("hide");
+num2.classList.add("hide");
+input1.classList.add("hide");
+startButton.innerHTML = "Reset";
+startButton.style.backgroundColor = "red"
+
+
+
+
+if(standardHeight < userHeight & userHeight >= 70.4){
+
+    
+
+    console.log("standard height is smaller than user height");
+
+        if(userHeight >=  70.4 & userHeight <= 74.4){
+        console.log(userHeight);
+        aHeight = aHeight +  70;
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 74.4 & userHeight <= 78.8){
+        console.log(userHeight);
+        aHeight = aHeight + 74;
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S"; 
+        
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 78.8 & userHeight <= 82.4){
+        console.log(userHeight);
+        aHeight = aHeight + 78.4;
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+        
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 82.4 & userHeight <= 86.4){
+        console.log(userHeight);
+        aHeight = aHeight + 82;
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }if(userHeight >= 86.4 & userHeight <= 90.15){
+        console.log(userHeight);
+        aHeight = aHeight + 86;
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";  
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 90 & userHeight <= 94.3){
+        console.log(userHeight);
+        aHeight = aHeight + 89.75;
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML"; 
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 94.3 & userHeight <= 97.9){
+        console.log(userHeight);
+        aHeight = aHeight + 93.9;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 97.9 & userHeight <= 98.55){
+        console.log(userHeight);
+        aHeight = aHeight + 97.5;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 98.55 & userHeight <= 101.9){
+        console.log(userHeight);
+        aHeight = aHeight + 98.15;
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 101.9 & userHeight <= 104.15){
+        console.log(userHeight);
+        aHeight = aHeight + 101.5;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 104.15 & userHeight <= 106.15){
+        console.log(userHeight);
+        aHeight = aHeight + 103.75;
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 106.15 & userHeight <= 109.9){
+        console.log(userHeight);
+        aHeight = aHeight + 105.75;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 106.15 & userHeight <= 109.9){
+        console.log(userHeight);
+        aHeight = aHeight + 105.75;
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";  
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 109.9 & userHeight <= 113.9){
+        console.log(userHeight);
+        aHeight = aHeight + 109.5;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL"; 
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 113.9 & userHeight <= 117.9){
+        console.log(userHeight);
+        aHeight = aHeight + 113.5;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S"; 
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 117.9 & userHeight <= 121.65){
+        console.log(userHeight);
+        aHeight = aHeight + 117.5;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S"; 
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 121.65 & userHeight <= 125.8){
+        console.log(userHeight);
+        aHeight = aHeight + 121.25;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 125.8 & userHeight <= 126.65){
+        console.log(userHeight);
+        aHeight = aHeight + 125.4;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 126.65 & userHeight <= 129.65){
+        console.log(userHeight);
+        aHeight = aHeight + 126.25;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L"; 
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";   
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 129.65 & userHeight <= 129.8){
+        console.log(userHeight);
+        aHeight = aHeight + 129.25;
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";   
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 129.4 & userHeight <= 133.4){
+        console.log(userHeight);
+        aHeight = aHeight + 129;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 133.4 & userHeight <= 133.65){
+        console.log(userHeight);
+        aHeight = aHeight + 133;
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 133.65 & userHeight <= 137.4){
+        console.log(userHeight);
+        aHeight = aHeight + 133.25; 
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 137.4 & userHeight <= 137.65){
+        console.log(userHeight);
+        aHeight = aHeight + 137; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 137.65 & userHeight <= 141.4){
+        console.log(userHeight);
+        aHeight = aHeight + 137.25; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL"; 
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";    
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 141.4 & userHeight <= 145.15){
+        console.log(userHeight);
+        aHeight = aHeight + 141; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";  
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";  
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 145.15 & userHeight <= 145.4){
+        console.log(userHeight);
+        aHeight = aHeight + 144.75; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";  
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";  
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 145.4 & userHeight <= 149.4){
+        console.log(userHeight);
+        aHeight = aHeight + 145; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";  
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";  
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 149.4 & userHeight <= 153.15){
+        console.log(userHeight);
+        aHeight = aHeight + 149; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 153.15 & userHeight <= 157.15){
+        console.log(userHeight);
+        aHeight = aHeight + 152.75; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";   
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 157.15 & userHeight <= 160.9){
+        console.log(userHeight);
+        aHeight = aHeight + 156.75; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";        
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 160.9 & userHeight <= 161.15){
+        console.log(userHeight);
+        aHeight = aHeight + 160.5; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";   
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 161.15 & userHeight <= 161.55){
+        console.log(userHeight);
+        aHeight = aHeight + 160.75; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";     
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";   
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 161.55 & userHeight <= 164.9){
+        console.log(userHeight);
+        aHeight = aHeight + 161.15; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";        
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";;   
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";   
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 164.9 & userHeight <= 165.15){
+        console.log(userHeight);
+        aHeight = aHeight + 164.5; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";       
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S"; 
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 165.15 & userHeight <= 169.15){
+        console.log(userHeight);
+        aHeight = aHeight + 164.75; 
+        xlValue = xlValue + 1;
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL"; 
+            
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 169.15 & userHeight <= 172.9){
+        console.log(userHeight);
+        aHeight = aHeight + 168.75; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";     
+           
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 172.9 & userHeight <= 176.9){
+        console.log(userHeight);
+        aHeight = aHeight + 172.5; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";    
+
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 176.9 & userHeight <= 180.65){
+        console.log(userHeight);
+        aHeight = aHeight + 176.65; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 180.65 & userHeight <= 184.65){
+        console.log(userHeight);
+        aHeight = aHeight + 180.25; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 184.65 & userHeight <= 189.05){
+        console.log(userHeight);
+        aHeight = aHeight + 184.25; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 189.05 & userHeight <= 192.65){
+        console.log(userHeight);
+        aHeight = aHeight + 188.65; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";  
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 192.65 & userHeight <= 196.65){
+        console.log(userHeight);
+        aHeight = aHeight + 192.25; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";  
+
+        xsValue = xsValue + 1;
+        xs.classList.remove("hide");
+        xs.innerHTML = "+ " + xsValue +"-XS";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }else if(userHeight >= 196.65){
+        console.log(userHeight);
+        aHeight = aHeight + 196.25; 
+        xlValue = xlValue + 1;
+        xlValue = xlValue + 1;  
+        xl.classList.remove("hide");    
+        xl.innerHTML = "+ " + xlValue +"-XL";    
+        
+        l.classList.remove("hide");       
+        lValue = lValue + 1;
+        l.innerHTML = "+ " + lValue +"-L";    
+           
+
+        mlValue = mlValue + 1;
+        ml.classList.remove("hide");
+        ml.innerHTML = "+ " + mlValue +"-ML";
+
+        mValue = mValue + 1;
+        m.classList.remove("hide");
+        m.innerHTML = "+ " + mValue +"-M";  
+
+        sValue = sValue + 1;
+        s.classList.remove("hide");
+        s.innerHTML = "+ " + sValue +"-S";
+
+        noMore.classList.remove("hide");
+        aHeightHtml.classList.remove("hide");
+        noMore.innerHTML = "Desired Height " + originalDesiredHeight + " inches";
+        aHeightHtml.innerHTML = "Achieved Height " + aHeight + " inches";
+        console.log("the most you can put");
+    }
+
+    
+    
+
+
+
+
+}else if(userHeight <= 70.399999999999999999999999999999999999999999999 & userHeight > 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001){
+    noMore.classList.remove("hide");
+    noMore.innerHTML = "You don't need to add more"
+}else{
+    noMore.classList.remove("hide");
+    noMore.innerHTML = "Error: Add your height in inches"
+}
+
+
+}else{
+    location.reload();
+}
+
+
+})    
+
+}else{
+    console.log("error")
+}   
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
